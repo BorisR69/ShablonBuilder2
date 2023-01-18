@@ -1,9 +1,8 @@
 public class PersonBuilder {
-//    Person newPerson;
     String firstName;
     String surName;
-    int age = 0;
-    String address = null;
+    int age;
+    String address;
 
     public PersonBuilder addFirstName(String val) {
         firstName = val;
@@ -26,13 +25,13 @@ public class PersonBuilder {
     }
 
     public Person build() {
+        if (firstName == null) {
+            throw new IllegalStateException("firstName must be != null!");
+        } else if (surName == null) {
+            throw new IllegalStateException("surName must be != null!");
+        }else if (age < 0) {
+            throw new IllegalArgumentException("Age must be > 0!");
+        }
         return new Person(this);
     }
-
-//    private void Person (PersonBuilder personBuilder) {
-//        firstName = personBuilder.firstName;
-//        surName = personBuilder.surName;
-//        age = personBuilder.age;
-//        address = personBuilder.address;
-//    }
 }

@@ -3,26 +3,8 @@ import java.util.Objects;
 public class Person {
     protected final String firstName;
     protected final String surName;
-    protected int age = 0;
-    protected String address = null;
-
-    public Person(String firstName, String surName) {
-        this.firstName = firstName;
-        this.surName = surName;
-    }
-
-    public Person(String firstName, String surName, int age) {
-        this.firstName = firstName;
-        this.surName = surName;
-        this.age = age;
-    }
-
-    public Person (String firstName, String surName, int age, String address){
-        this.firstName = firstName;
-        this.surName = surName;
-        this.age = age;
-        this.address = address;
-    }
+    protected int age;
+    protected String address;
 
     public String getFirstName() {
         return firstName;
@@ -39,14 +21,14 @@ public class Person {
     public String getAddress() {
         return address;
     }
-    public boolean hasAge() {
+    public boolean hasAge() { // Проверка заполнения поля возраст
         if (age > 0){
             return true;
         } else
             return false;
     }
-    public boolean hasAddress() {
-        if (address.isEmpty()){
+    public boolean hasAddress() { // Проверка заполнения поля адрес
+        if (address == null){
             return false;
         } else
             return true;
@@ -54,14 +36,16 @@ public class Person {
     public void setAddress(String address) {
         this.address = address;
     }
-    public void happyBirthday() {
-        this.age = age + 1;
+    public void happyBirthday() { // Увеличение возраста на 1 год
+        if (age > 0) {
+            this.age = age + 1;
+        }
     }
 
     @Override
     public String toString() {
-        return "Имя: " + firstName + "\nФамилия: " + surName + "\nВозраст: " + age +
-                "\nАдрес: " + address;
+        return firstName + " " + surName + " " + age + " лет" +
+                " проживает в  " + address;
     }
 
     @Override
@@ -78,10 +62,14 @@ public class Person {
         return Objects.hash(firstName, surName, age, address);
     }
 
-    Person(PersonBuilder personBuilder) {
+    public Person(PersonBuilder personBuilder) { // строитель класса Person
         firstName = personBuilder.firstName;
         surName = personBuilder.surName;
         age = personBuilder.age;
         address = personBuilder.address;
+    }
+
+    public PersonBuilder newChildBuilder() { // полузаполненный билдер для ребёнка,
+        return new PersonBuilder().addSurName(getSurName()).addAddress(getAddress());
     }
 }
