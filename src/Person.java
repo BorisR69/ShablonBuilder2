@@ -21,21 +21,19 @@ public class Person {
     public String getAddress() {
         return address;
     }
+
     public boolean hasAge() { // Проверка заполнения поля возраст
-        if (age > 0){
-            return true;
-        } else
-            return false;
+        return age > 0;
     }
+
     public boolean hasAddress() { // Проверка заполнения поля адрес
-        if (address == null){
-            return false;
-        } else
-            return true;
+        return address != null;
     }
+
     public void setAddress(String address) {
         this.address = address;
     }
+
     public void happyBirthday() { // Увеличение возраста на 1 год
         if (age > 0) {
             this.age = age + 1;

@@ -29,7 +29,7 @@ public class PersonBuilder {
             throw new IllegalStateException("firstName must be != null!");
         } else if (surName == null) {
             throw new IllegalStateException("surName must be != null!");
-        }else if (age < 0) {
+        } else if (age < 0) {
             throw new IllegalArgumentException("Age must be > 0!");
         }
         return new Person(this);
